@@ -1,1 +1,7 @@
-<p><%= @user.name %></p>
+User name: <%= @user.name %><br>
+Events hosted by user:<br>
+<ul>
+  <% @user.hostedevents.each do |event| %>
+    <li><%= event.name %></li>
+  <% end %>
+</ul>

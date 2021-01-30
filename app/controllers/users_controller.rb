@@ -21,14 +21,12 @@ class UsersController < ApplicationController
     begin
       @user = User.find_by!(user_params)
     rescue ActiveRecord::RecordNotFound
-      # TODO: Flash.now user does not exist
       flash.now[:error] = "Invalid user name"
       render
     else
-      # TODO: Flash thank you for signing in
       flash[:notice] = "Successfully signed in"
       session[:current_user_id] = @user.id
-      redirect_to @user
+      redirect_to "/events"
     end
   end
 

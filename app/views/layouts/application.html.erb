@@ -11,12 +11,6 @@
   </head>
 
   <body>
-    <% if flash[:notice] %>
-      <div class="notice"><%= flash[:notice] %></div>
-    <% end %>
-    <% if flash[:error] %>
-      <div class="error"><%= flash[:error] %></div>
-    <% end %>
     <% if session[:current_user_id] %>
       Signed in as <%= User.find_by_id(session[:current_user_id]).name %>
       <%= form_with url: "/users/signout", method: :post do |form| %>
@@ -24,6 +18,12 @@
       <% end %>
     <% else %>
       <%= link_to "Sign in", "/users/new" %>
+    <% end %>
+    <% if flash[:notice] %>
+      <div class="notice"><%= flash[:notice] %></div>
+    <% end %>
+    <% if flash[:error] %>
+      <div class="error"><%= flash[:error] %></div>
     <% end %>
 
     <%= yield %>
