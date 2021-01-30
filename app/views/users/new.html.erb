@@ -1,6 +1,13 @@
-<h1>New User</h1>
+<h1>Sign In</h1>
+<%= form_with model: @user, url: "/users/signin", method: :post do |form| %>
+  <%= form.text_field :name %>
+  <%= form.submit "Sign in"%>
+<% end %>
 
+<h1>Or</h1>
+
+<h1>Sign Up</h1>
 <%= form_with model: @user do |form| %>
   <%= form.text_field :name %>
-  <%= form.submit %>
+  <%= form.submit "Sign up"%>
 <% end %>

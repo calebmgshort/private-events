@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      session[:current_user_id] = @user.id
       redirect_to @user
     else
       render :new
@@ -14,6 +15,26 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+  end
+
+  def signin
+    begin
+      @user = User.find_by!(user_params)
+    rescue ActiveRecord::RecordNotFound
+      # TODO: Flash.now user does not exist
+      flash.now[:error] = "Invalid user name"
+      render
+    else
+      # TODO: Flash thank you for signing in
+      flash[:notice] = "Successfully signed in"
+      session[:current_user_id] = @user.id
+      redirect_to @user
+    end
+  end
+
+  def signout
+    session.delete(:current_user_id)
+    redirect_to root_path
   end
 
   private
