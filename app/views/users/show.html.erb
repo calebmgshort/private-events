@@ -1,7 +1,21 @@
 User name: <%= @user.name %><br>
-Events hosted by user:<br>
+<h3>Events hosted by you:</h3><br>
 <ul>
-  <% @user.hostedevents.each do |event| %>
+  <% @hostedevents.each do |event| %>
+    <li><%= event.name %></li>
+  <% end %>
+</ul>
+
+<h3>Events previously attended by you:</h3><br>
+<ul>
+  <% @previously_attended_events.each do |event| %>
+    <li><%= event.name %></li>
+  <% end %>
+</ul>
+
+<h3>Upcoming events you are registered for:</h3><br>
+<ul>
+  <% @upcoming_events.each do |event| %>
     <li><%= event.name %></li>
   <% end %>
 </ul>

@@ -2,7 +2,13 @@ class EventsController < ApplicationController
   before_action :require_login, only: [:new, :create]
 
   def index
-    @events = Event.all
+    @past_events = Event.past
+    @upcoming_events = Event.upcoming
+    if session[:current_user_id]
+      user = User.find(session[:current_user_id])
+      @attended_events = user.attended_events
+      @unattended_events = Event.all - @attended_events
+    end
   end
 
   def new

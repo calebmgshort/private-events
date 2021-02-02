@@ -1,6 +1,26 @@
-<h1>Events#index</h1>
+<h2>Past events:</h2>
 <ul>
-  <% @events.each do |event| %>
+  <% @past_events.each do |event| %>
     <li><%= event.name %></li>
   <% end %>
 </ul>
+<h2>Upcoming events:</h2>
+<ul>
+  <% @upcoming_events.each do |event| %>
+    <li><%= event.name %></li>
+  <% end %>
+</ul>
+<% if session[:current_user_id] %>
+  <h2>Events attended by you</h2>
+  <ul>
+    <% @attended_events.each do |event| %>
+      <li><%= event.name %></li>
+    <% end %>
+  </ul>
+  <h2>Events available to you</h2>
+  <ul>
+    <% @unattended_events.each do |event| %>
+      <li><%= event.name %></li>
+    <% end %>
+  </ul>
+<% end %>
